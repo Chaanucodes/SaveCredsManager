@@ -1,0 +1,82 @@
+package com.example.utilities.passwordmanager.service.response
+
+import android.content.Context
+import android.graphics.drawable.ShapeDrawable
+import android.service.autofill.Dataset
+import android.service.autofill.FillResponse
+import android.view.autofill.AutofillValue
+import android.widget.RemoteViews
+import com.example.utilities.passwordmanager.R
+import com.example.utilities.passwordmanager.core.cipher.Cipher
+import com.example.utilities.passwordmanager.core.database.PackageDao
+import com.example.utilities.passwordmanager.feature.splash.SplashActivity
+import com.example.utilities.passwordmanager.model.PackageCredential
+import com.example.utilities.passwordmanager.service.model.AuthField
+import io.reactivex.schedulers.Schedulers
+
+class ResponseBuilder(
+    private val packageDao: PackageDao,
+    private val cipher: Cipher
+) {
+
+    fun createResponse(serviceContext: Context, appPackageName: String, authField: AuthField): FillResponse? {
+        if (authField.usernameField == null && authField.passwordField == null) return null
+
+        try {
+            val data = packageDao.findPackage(appPackageName)
+                .map {
+                    PackageCredential(
+                        it.name,
+                        it.packageName,
+                        cipher.decrypt(it.username, appPackageName),
+                        cipher.decrypt(it.password, appPackageName),
+                        ShapeDrawable()
+                    )
+                }
+                .subscribeOn(Schedulers.io())
+                .blockingGet()
+            val datasetBuilder = Dataset.Builder()
+            if (authField.usernameField != null) {
+                datasetBuilder.setValue(
+                    authField.usernameField?.autofillId!!,
+                    AutofillValue.forText(data.username),
+                    newDatasetPresentation(serviceContext)
+                )
+            }
+            if (authField.passwordField != null) {
+                datasetBuilder.setValue(
+                    authField.passwordField?.autofillId!!,
+                    AutofillValue.forText(data.password),
+                    newDatasetPresentation(serviceContext)
+                )
+            }
+            val unlockedDataset = datasetBuilder.build()
+            val lockedDatasetBuilder = Dataset.Builder()
+            val authentication = SplashActivity.newIntentSender(serviceContext, unlockedDataset)
+            if (authField.usernameField != null) {
+                val presentation = newDatasetPresentation(serviceContext)
+                lockedDatasetBuilder.setValue(authField.usernameField?.autofillId!!, null, presentation)
+                    .setAuthentication(authentication)
+            }
+            if (authField.passwordField != null) {
+                val presentation = newDatasetPresentation(serviceContext)
+                lockedDatasetBuilder.setValue(authField.passwordField?.autofillId!!, null, presentation)
+                    .setAuthentication(authentication)
+            }
+
+            return FillResponse.Builder()
+                .addDataset(lockedDatasetBuilder.build())
+                .build()
+
+        } catch (e: Exception) {
+            return null
+        }
+    }
+
+    private fun newDatasetPresentation(context: Context): RemoteViews {
+        val presentation = RemoteViews(context.packageName, R.layout.list_dataset)
+        presentation.setTextViewText(R.id.text, context.getString(R.string.message_autofill))
+        presentation.setImageViewResource(R.id.icon, R.drawable.ic_icon_primary)
+        return presentation
+    }
+}

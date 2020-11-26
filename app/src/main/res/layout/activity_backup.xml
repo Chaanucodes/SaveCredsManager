@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.utilities.passwordmanager.feature.backup.BackupViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbarInclude"
+            layout="@layout/toolbar"
+            app:title="@{viewModel.title}" />
+
+        <TextView
+            android:id="@+id/setup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/title_setup"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbarInclude" />
+
+        <LinearLayout
+            android:id="@+id/register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="@{!viewModel.keyAvailable}"
+            android:focusable="@{!viewModel.keyAvailable}"
+            android:onClick="@{() -> viewModel.showRegisterKeyDialog()}"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/setup">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/label_register_key"
+                android:textAppearance="?android:attr/textAppearanceListItem" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/message_setup_subtitle"
+                android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+                android:textColor="@color/colorDivider" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorDivider"
+            app:layout_constraintTop_toBottomOf="@id/register" />
+
+        <TextView
+            android:id="@+id/backupTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/title_backup"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider" />
+
+        <LinearLayout
+            android:id="@+id/backup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="@{viewModel.keyAvailable}"
+            android:focusable="@{viewModel.keyAvailable}"
+            android:onClick="@{() -> viewModel.showBackupDialog()}"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/backupTitle">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/label_backup"
+                android:textAppearance="?android:attr/textAppearanceListItem" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/message_backup_subtitle"
+                android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+                android:textColor="@color/colorDivider" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/restore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="@{viewModel.keyAvailable}"
+            android:focusable="@{viewModel.keyAvailable}"
+            android:onClick="@{() -> viewModel.showRestoreDialog()}"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/backup">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/title_restore"
+                android:textAppearance="?android:attr/textAppearanceListItem" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/message_restore_subtitle"
+                android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+                android:textColor="@color/colorDivider" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/clean"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="@{viewModel.keyAvailable}"
+            android:focusable="@{viewModel.keyAvailable}"
+            android:onClick="@{() -> viewModel.showCleanDialog()}"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/restore">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/title_delete"
+                android:textAppearance="?android:attr/textAppearanceListItem" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/message_delete_subtitle"
+                android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+                android:textColor="@color/colorDivider" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

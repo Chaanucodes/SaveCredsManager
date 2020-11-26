@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name"> Save creds</string>
+    <string name="content_description">Content description</string>
+
+    <string name="control_add">Add</string>
+    <string name="control_cancel">Cancel</string>
+    <string name="control_ok">OK</string>
+    <string name="control_generate">Generate</string>
+    <string name="control_copy">Copy</string>
+    <string name="control_edit">Edit</string>
+    <string name="control_save">Save</string>
+    <string name="control_delete">Delete</string>
+    <string name="control_proceed">Proceed</string>
+
+    <string name="title_authenticate">Fingerprint Authentication</string>
+    <string name="title_activate">Autofill Service</string>
+    <string name="title_authenticate_subtitle">Login to access app</string>
+    <string name="title_applications">Applications</string>
+    <string name="title_sites">Sites</string>
+    <string name="title_packages">Packages</string>
+    <string name="title_add_site">Add Site</string>
+    <string name="title_login">Enter your credentials</string>
+
+    <string name="message_authenticate">Touch the sensor</string>
+    <string name="message_fingerprint_not_supported">Fingerprint authentication is not supported in this device.</string>
+    <string name="message_fingerprint_not_registered">No fingerprint registered in this device. Register fingerprints first.</string>
+    <string name="message_activate">This app uses the autofill framework to autofill your apps with credentials. Currently, this service is not enabled. Please enable in settings.</string>
+    <string name="message_searching_packages">Finding all installed packages</string>
+    <string name="message_searching_packages_credential">Finding all stored credentials</string>
+    <string name="message_add_package">Set a credential for this package. Alternatively, you can also generate a strong password by tapping Generate.</string>
+    <string name="message_view_credential">Below is the currently saved credential. Tap copy to save the password to the clipboard.</string>
+    <string name="message_add_site">Set a credential for a new site. Alternatively, you can also generate a strong password by tapping Generate.</string>
+    <string name="message_clipboard">Password has been copied to clipboard</string>
+    <string name="message_copyright"></string>
+    <string name="message_autofill">Autofill with SaveCreds</string>
+    <string name="message_backup">Important Notice!\n\nBackup requires you to connect to the application server and publish your details. All details published will be encrypted using your registered key. This app does not in any way save your keys so there\'s no way to retrieve your data in case you forgot about your key. If you are not comfortable in publishing your encrypted details, please backup manually.</string>
+
+    <string name="label_login_name">Username</string>
+    <string name="label_login_pass">Password</string>
+    <string name="label_site_name">Site name</string>
+    <string name="label_site_url">URL</string>
+    <string name="label_about">About</string>
+    <string name="label_backup">Backup</string>
+    <string name="label_version">Version %1$s</string>
+    <string name="label_license">License</string>
+    <string name="label_policy">Privacy Policy</string>
+    <string name="label_login">Login</string>
+    <string name="label_sign_up">Sign up</string>
+    <string name="label_login_new_account">Create an account</string>
+    <string name="label_login_registered">Login now</string>
+    <string name="label_register_key">Register key</string>
+
+    <string name="progress_login_register">Registering account…</string>
+    <string name="progress_login_authenticate">Logging in…</string>
+
+    <string name="error_empty">Field cannot be empty</string>
+    <string name="error_mismatch">Field values mismatch</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_email">Invalid email format</string>
+    <string name="error_pass_min">Must be at least 6 characters</string>
+
+    <!-- Backup -->
+    <string name="title_backup">Backup</string>
+    <string name="title_restore">Restore</string>
+    <string name="title_delete">Clean</string>
+    <string name="title_setup">Setup</string>
+    <string name="message_setup_subtitle">Key for encrypting backup data</string>
+    <string name="message_backup_subtitle">Backup all saved credentials to the cloud</string>
+    <string name="message_restore_subtitle">Pull all saved credentials from the cloud</string>
+    <string name="message_delete_subtitle">Delete all uploaded credentials and key</string>
+    <string name="message_key_dialog">This one time key will be used to encrypt all your data before sending to the cloud.
+        Once set, this key cannot be modified unless a Clean is performed. The key will not be persisted and therefore cannot be recoverable from this application.
+        Please backup this key to be able to restore data from the cloud.\n\nA network connection is required for this operation.
+        In case of unavailability of network connection, key will be updated when network connection becomes available.</string>
+    <string name="message_password_1_hint">Enter key here</string>
+    <string name="message_password_2_hint">Verify your key</string>
+    <string name="message_key_backup">Warning. Backing up will erase all previous cloud data and will be replaced with the currently stored data. Proceed by providing the registered key.\n\nA
+        network connection is required for this operation. In case of unavailability of network connection, data will be uploaded once connection becomes available.</string>
+    <string name="message_backup_ongoing">Backup ongoing. Please do not close the application or press any button. This dialog will automatically close once backup is finished.</string>
+    <string name="message_key_restore">Warning. Restoring will overwrite duplicate apps or sites. Proceed by providing the registered key.\n\nA
+        network connection is required for this operation. In case of unavailability of network connection, data will be uploaded once connection becomes available.</string>
+    <string name="message_restore_ongoing">Restoration ongoing. Please do not close the application or press any button. This dialog will automatically close once operation is finished.</string>
+    <string name="message_register_ongoing">Registering key. Please do not close the application or press any button. This dialog will automatically close once operation is finished.</string>
+    <string name="message_key_clean">Warning. Cleanup will erase all cloud data including the key. This process cannot be undone. Proceed by providing the registered key.\n\nA
+        network connection is required for this operation. In case of unavailability of network connection, data will be uploaded once connection becomes available.</string>
+    <string name="message_clean_ongoing">Cleanup ongoing. Please do not close the application or press any button. This dialog will automatically close once operation is finished.</string>
+</resources>

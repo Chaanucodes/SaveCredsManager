@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- Branded Launch Theme -->
+    <style name="AppTheme.BrandedLaunch">
+        <item name="android:windowBackground">@drawable/launcher_bg</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="ToolbarColoredBackArrow" parent="AppTheme">
+        <item name="android:textColorSecondary">@color/colorLight</item>
+    </style>
+
+    <style name="TabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/TabTextAppearance</item>
+        <item name="tabIndicatorColor">@color/colorPrimary</item>
+        <item name="tabSelectedTextColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="FragmentDialog" parent="Base.Theme.AppCompat.Light.Dialog.Alert" />
+
+</resources>

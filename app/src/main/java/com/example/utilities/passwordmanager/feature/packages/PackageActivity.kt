@@ -1,0 +1,64 @@
+package com.example.utilities.passwordmanager.feature.packages
+
+import android.os.Bundle
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.utilities.passwordmanager.R
+import com.example.utilities.passwordmanager.base.BaseAuthActivity
+import com.example.utilities.passwordmanager.databinding.ActivityPackageBinding
+import com.example.utilities.passwordmanager.feature.common.DividerDecorator
+import com.example.utilities.passwordmanager.feature.packages.add.AddPackageDialog
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import javax.inject.Inject
+
+class PackageActivity : BaseAuthActivity<ActivityPackageBinding>() {
+
+    @Inject
+    lateinit var supportFragmentInjector: DispatchingAndroidInjector<Fragment>
+
+    @Inject
+    lateinit var factory: PackageViewModel.Factory
+
+    @Inject
+    lateinit var packageAdapter: PackageAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun setupBindingAndViewModel(binding: ActivityPackageBinding) {
+        setToolbar(binding.toolbarInclude.toolbar, true)
+
+        binding.list.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+            addItemDecoration(DividerDecorator(ContextCompat.getDrawable(context, R.drawable.list_divider)!!))
+            adapter = packageAdapter
+        }
+
+        val vm = ViewModelProviders.of(this, factory)[PackageViewModel::class.java]
+        binding.viewModel = vm
+
+        packageAdapter.listener = {
+            vm.setCurrentPackage(it)
+            val dialog = AddPackageDialog()
+            dialog.show(supportFragmentManager, "package")
+        }
+
+        vm.packageList.observe(this, Observer {
+            packageAdapter.packageList = it
+        })
+    }
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> = supportFragmentInjector
+
+    override val layoutId: Int = R.layout.activity_package
+
+    override fun isAuthInitiallyRequired(): Boolean = false
+}
